@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            position: relative;
+            background-color: #000;
+        }
+
+        #wf {
+            position: absolute;
+            left: 59px;
+            top: 328px;
+            width: 215px;
+        }
+
+        @keyframes qiao {
+            0% {
+                transform: rotate(0);
+            }
+
+            50% {
+                transform: rotate(-30deg);
+            }
+
+            100% {
+                transform: rotate(0);
+            }
+        }
+
+        @keyframes zha {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+
+        span {
+            position: absolute;
+            color: #fff;
+            transition: 1.5s;
+        }
+
+        p {
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <p>您的功德：<span>0</span></p>
+    <img id="wf" src="https://pic8.58cdn.com.cn/nowater/webim/big/n_v20303e98d17d749a09134b1742e6c07e7.png" alt="">
+    <audio src="./mfm.mp3"></audio>
+
+    <script>
+        let music = document.querySelector('audio')
+        let span1 = document.querySelector('p').querySelector('span')
+        let body = document.body
+        let flag = true
+        var wf = document.getElementById('wf');
+        function create(span1) {
+            let span = document.createElement('span');
+            span.style.left = wf.offsetLeft + 'px'
+            span.style.top = wf.offsetTop + 'px'
+            span.innerHTML = '功德+1'
+            body.appendChild(span)
+            span.style.left = wf.offsetLeft + 'px'
+            span.style.top = wf.offsetTop - 150 + 'px'
+            span.style.transform = 'scale(1.2)'
+            span.style.opacity = 0
+            span1.innerHTML = parseInt(span1.innerHTML) + 1
+            setTimeout(() => {
+                body.removeChild(span)
+            }, 1500);
+        }
+        wf.onclick = function () {
+            music.play()
+            create(span1)
+            wf.style.animation = 'zha .1s linear'
+            setTimeout(() => {
+                wf.style.animation = ''
+                music.load()
+            }, 100);
+        }
+        // setInterval(() => {
+        //     wf.click()
+        // }, 600);
+    </script>
+</body>
+
+</html>
